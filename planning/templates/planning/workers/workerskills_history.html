@@ -1,0 +1,68 @@
+{% extends "planning/base.html" %}
+{% block content %}
+<div class="button_overview"><button onclick="location.href='{% url 'workerskills_modify' pk=worker.id pk_ws=workerskills.0.skill.id %}'" type="button">Add entry</button></div>
+<h3>Productivity history for {{ workerskills.0.skill.name }} from {{ worker.name }}</h3>
+<fieldset style="height: 30vh; position: relative;">
+	<canvas id="canvas"></canvas>
+</fieldset>
+<table>
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Productivity</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for workerskill in workerskills %}
+		<tr>
+			<td>{{ workerskill.date }}</td>
+			<td>{{ workerskill.productivity }} (<a href="{% url 'workerskills_productivity_edit' pk=worker.id pk_ws=workerskill.id %}">edit</a>)</td>
+			<td><a href="{% url 'workerskills_productivity_delete' pk=worker.id pk_ws=workerskill.id %}">Delete</a></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<script type="text/javascript">
+var config = {
+    type: 'line',
+    data: {
+        labels: [{% for workerskill in workerskills_up %}'{{ workerskill.date }}'{% if forloop.last %}{% else %},{% endif %}{% endfor %}],
+        datasets: [{
+            backgroundColor: '#000',
+            borderColor: '#000',
+            data: [{% for workerskill in workerskills_up %}{{ workerskill.productivity }}{% if forloop.last %}{% else %},{% endif %}{% endfor %}],
+            fill: false,
+        }]
+    },
+    options: {
+    	maintainAspectRatio: false,
+        legend: {
+            display: false
+        },
+        responsive: true,
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Date'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Productivity'
+                }
+            }]
+        }
+    }
+};
+
+window.onload = function() {
+    var ctx = document.getElementById('canvas').getContext('2d');
+    window.myLine = new Chart(ctx, config);
+};
+</script>
+{% endblock content %}

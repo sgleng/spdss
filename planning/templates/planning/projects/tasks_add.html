@@ -1,0 +1,14 @@
+{% extends "planning/base.html" %}
+{% block content %}
+<h3>Add task to project</h3>
+<form action="" method="POST">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  <fieldset class="form-group">
+  	<table>
+		{{ form.as_table }}
+	</table>
+	</fieldset>
+  <button type="submit">Add</button>
+</form>
+{% endblock content %}

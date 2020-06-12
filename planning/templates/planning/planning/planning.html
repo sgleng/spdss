@@ -1,0 +1,19 @@
+{% extends "planning/base.html" %}
+{% block content %}
+<div class="button_overview"><button onclick="location.href='{% url 'planning_create' %}'" type="button">Create planning</button></div>
+<h3>Planning</h3>
+This is the planning page of the system. By pressing 'Create planning' you can generate a new planning. Creating a planning brings all the other elements together. Creating a planning or schedule is done via the following step-by-step plan:
+<ol>
+    <li>Make sure that all information from other pages are correct, i.e., the availabilities are correct, the worker skills are correct, etc.</li>
+    <li>Create a planning by selecting the appropriate date. Then determine the minimum and maximum outputs per skill. This is largely pre-filled based on the outstanding tasks. However, it is not necessary to use the tasks function in this system.</li>
+    <li>Press submit. The algorithm will determine the optimal schedules based on four objective functions:
+        <ul>
+            <li>Output maximization</li>
+            <li>Gross profit maximization</li>
+            <li>Preference maximization</li>
+            <li>Skill progression maximization</li>
+        </ul>
+    </li>
+    <li>A spider plot shows the trade-offs between the several objective functions. In the corresponding table, the values are shown. Furthermore, for every objective function, the optimal schedule is given, based on who is most suitable for which skill during which shift.</li>
+</ol>
+{% endblock content %}

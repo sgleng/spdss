@@ -1,0 +1,16 @@
+{% extends "planning/base.html" %}
+{% block content %}
+<style type="text/css">
+input {
+	width: auto !important;
+}
+</style>
+<h3>Create planning</h3>
+<form action="{% url 'planning_result' %}" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+	</table>
+    <input type="submit" value="Create">
+</form>
+{% endblock content %}

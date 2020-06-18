@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'planning/main.css' %}?{% now "U" %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'planning/additional.css' %}?{% now "U" %}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+
+    {% if title %}
+        <title>Master's Thesis - {{ title }}</title>
+    {% else %}
+        <title>Master's Thesis</title>
+    {% endif %}
+</head>
+<body>
+  <main>
+    <h1>Master's Thesis</h1>
+    <aside><strong>Created by:</strong> S.G.L. Engbers, s.g.l.engbers@student.rug.nl</aside>
+    <header>
+      <ul>
+        <li><a href="/">Home</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'workers' %}">Workers</a></li>
+            <li><a href="{% url 'skills' %}">Skills</a></li>
+            <li><a href="{% url 'projects' %}">Projects</a></li>
+            <li><a href="{% url 'shifts' %}">Shifts</a></li>
+            <li><a href="{% url 'availability' %}">Availability</a></li>
+            <li><a href="{% url 'planning' %}">Planning</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'register' %}">Register</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+      </ul> 
+    </header>
+    <hr />
+    {% if messages %}
+        {% for message in messages %}
+            <aside>{{ message }}</aside>
+        {% endfor %}
+        <hr />
+    {% endif %}
+    {% block content %}{% endblock %}
+    <hr />
+    <small>&copy; 2020 S.G.L. Engbers - Developed for the University of Groningen</small>
+  </main>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends "planning/base.html" %}
+{% block content %}
+<div class="button_overview"><button onclick="location.href='{% url 'shifts_add' %}'" type="button">New shift</button></div>
+<h3>Shifts</h3>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Length</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for shift in shifts %}
+		<tr>
+			<td>{{ shift.name }}</td>
+			<td>{{ shift.length }} hours</td>
+			<td><a href="{% url 'shifts_edit' pk=shift.id %}">Edit</a> - <a href="{% url 'shifts_delete' pk=shift.id %}">Delete</a></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock content %}

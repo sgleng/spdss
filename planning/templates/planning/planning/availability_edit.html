@@ -1,0 +1,11 @@
+{% extends "planning/base.html" %}
+{% block content %}
+<h3>Edit shift</h3>
+<form method="POST">
+	{% csrf_token %}
+	<fieldset class="form-group">
+		{{ form }}
+	</fieldset>
+	<button type="submit">Edit</button>
+</form>
+{% endblock content %}

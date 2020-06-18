@@ -1,0 +1,23 @@
+{% extends "planning/base.html" %}
+{% block content %}
+<div class="button_overview"><button onclick="location.href='{% url 'workerskills_add' pk=worker.id %}'" type="button">Add skill</button></div>
+<h3>Edit skills from {{ worker.name }}</h3>
+<table>
+	<thead>
+		<tr>
+			<th>Skill</th>
+			<th>Productivity</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for workerskill in workerskills %}
+		<tr>
+			<td>{{ workerskill.skill.name }}</td>
+			<td>{{ workerskill.productivity }} (<a href="{% url 'workerskills_modify' pk=worker.id pk_ws=workerskill.skill.id %}">modify</a>)</td>
+			<td><a href="{% url 'workerskills_productivity_history' pk=worker.id pk_ws=workerskill.skill.id %}">Show history</a></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock content %}

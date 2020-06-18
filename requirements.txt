@@ -1,0 +1,13 @@
+django
+gunicorn
+whitenoise
+pytz
+numpy
+pyomo
+martor
+gunicorn
+django_feather
+pandas
+pyutilib
+scipy
+django_extensions

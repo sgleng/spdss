@@ -1,7 +1,7 @@
 # Setup Klompé
 
 1. Clone the project. Alternatively, you can also download the full source from GitHub.
-> git clone https://github.com/sgleng/klompe.git
+> git clone https://github.com/sgleng/spdss.git
 2. Install Python 3 and pip.
 > sudo apt-get install python3-pip
 3. Consider a virtual environment to prevent conflicts with other tools. For Mac, use the following terminal command **in the correct folder**:
